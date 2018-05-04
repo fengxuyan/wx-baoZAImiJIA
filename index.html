@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <style>
+        .boxes {
+            padding:1rem;
+            width: 100%;
+        }
+        .boxes .box {
+            height: 3rem;
+            color: #eee;
+            line-height: 3rem;
+            text-align: center;
+            font-weight: bold;
+            transition: all .2s ease;
+            font-size: 0.5rem;
+        }
+        .box-1 {
+            background-color: #35BED1;
+        }
+
+        .box-2 {
+            background-color: #90C93E;
+        }
+
+        .box-3 {
+            background-color: #F85953;
+        }
+
+        .box-4 {
+            background-color: #F9A801;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="am-avg-sm-2 boxes">
+    <li class="box box-1">早教套组</li>
+    <li class="box box-2"></li>
+    <li class="box box-3"></li>
+    <li class="box box-4"></li>
+</ul>
+
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/rem.js"></script>
+
+<script>
+    $('.boxes .box').on('click',function () {
+        $('.boxes').fadeOut(10);
+        location.href='zjtz.html'
+    })
+</script>
+</body>
+
+</html>
