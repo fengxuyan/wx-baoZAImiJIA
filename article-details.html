@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+<div data-am-widget="slider" class="articleDetails-slider am-slider am-slider-default"
+     data-am-slider='{ video: true, slideshow: false,directionNav:false,controlNav:false,slideshowSpeed:10,animationSpeed:150}'>
+    <div class="video-title">手摇铃</div>
+    <div class="video-title tip-bottom">点击封面进行预览</div>
+    <ul class="am-slides">
+        <li><img src="src/images/box.jpg"></li>
+        <li><img src="src/images/box.jpg"></li>
+        <li><img src="src/images/box.jpg"></li>
+    </ul>
+</div>
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/rem.js"></script>
+<script>
+    //解决300毫秒延迟问题
+    $(function () {
+        // 解决ios端click事件300毫秒延迟
+        FastClick.attach(document.body);
+    });
+    var body_height = document.documentElement.clientHeight;
+    $('body').css('height', body_height)
+
+</script>
+
+</body>
+</html>

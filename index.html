@@ -4,36 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="src/css/amazeui.min.css">
-    <style>
-        .boxes {
-            padding:1rem;
-            width: 100%;
-        }
-        .boxes .box {
-            height: 3rem;
-            color: #eee;
-            line-height: 3rem;
-            text-align: center;
-            font-weight: bold;
-            transition: all .2s ease;
-            font-size: 0.5rem;
-        }
-        .box-1 {
-            background-color: #35BED1;
-        }
-
-        .box-2 {
-            background-color: #90C93E;
-        }
-
-        .box-3 {
-            background-color: #F85953;
-        }
-
-        .box-4 {
-            background-color: #F9A801;
-        }
-    </style>
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
 
@@ -50,9 +22,12 @@
 
 <script>
     $('.boxes .box').on('click',function () {
-        $('.boxes').fadeOut(10);
         location.href='zjtz.html'
     })
+    //解决300毫秒延迟问题
+    $(function() {
+        $.AMUI.FastClick.attach(document.body);
+    });
 </script>
 </body>
 

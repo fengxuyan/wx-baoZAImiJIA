@@ -1,0 +1,179 @@
+/*
+首页
+ */
+.boxes {
+    padding: 1rem;
+    width: 100%;
+}
+
+.boxes .box {
+    height: 3rem;
+    color: #eee;
+    line-height: 3rem;
+    text-align: center;
+    font-weight: bold;
+    transition: all .2s ease;
+    font-size: 0.5rem;
+}
+
+.box-1 {
+    background-color: #35BED1;
+}
+
+.box-2 {
+    background-color: #90C93E;
+}
+
+.box-3 {
+    background-color: #F85953;
+}
+
+.box-4 {
+    background-color: #F9A801;
+}
+
+/*
+详细分类页面
+ */
+.sort-container.am-tabs-d2 .am-tabs-nav, .sort-container .am-tabs-d2 .am-tabs-nav > .am-active {
+    background: #fff;
+    background-color: #fff;
+}
+
+.sort-container.am-tabs-d2 .am-tabs-nav > .am-active a, .sort-container.am-tabs-d2 .am-tabs-nav > .am-active:after {
+    color: #F4C062;
+    border-bottom-color: #F4C062;
+}
+
+.am-tabs-d2 .am-tabs-nav > .am-active {
+    background-color: #fff;
+    border-bottom: 2px solid #F4C062;
+}
+
+.am-tabs-d2 .am-tabs-nav > .am-active a, .am-tabs-d2 .am-tabs-nav a {
+    line-height: 14px;
+}
+
+.am-tabs-d2 .am-tabs-nav > .am-active:after {
+    border: 3px rgba(0, 0, 0, 0) solid;
+}
+
+.sort-container.am-tabs-d2 .am-tabs-nav li {
+    height: 1.3rem;
+}
+
+.sort-container.am-tabs-d2 .am-tabs-nav a {
+    display: inline-block;
+}
+
+.sort-container.am-tabs-d2 .am-tabs-nav a i {
+    display: inline-block;
+    width: .6rem;
+    height: .6rem;
+    background-image: url("../images/icon.svg");
+    background-size: cover;
+}
+
+.sort-container.am-tabs-d2 .am-tabs-nav a span {
+    display: block;
+}
+
+.sort-container .am-tabs-bd {
+    background: #F2F2F2;
+}
+
+.g-box img {
+    width: 100%;
+}
+
+.sort-container [class*=am-u-] + [class*=am-u-]:last-child {
+    float: left;
+}
+
+.box-container {
+    padding: 0 0.2rem .2rem !important;
+}
+
+.box-container .box {
+    margin: 0;
+    padding: 0.1rem;
+}
+
+.sort-title {
+    padding-left: 0.2rem;
+    line-height: 1rem;
+    font-size: .4rem;
+}
+
+/*
+视频详情页面
+ */
+body {
+    overflow: hidden;
+}
+
+.video-title {
+    padding: 5% 0;
+    text-align: center;
+    font-size: .5rem;
+}
+
+.video-title.tip-bottom {
+    position: absolute;
+    top: 12rem;
+    font-size: .4rem;
+    width: 100%;
+    left: 0;
+    color: #E92616;
+}
+
+.details-slider {
+    padding: 0 5%;
+    height: 100%;
+}
+
+.am-slider-default {
+    margin: 0;
+    box-shadow: none;
+}
+
+.details-slider .am-slides li {
+    width: 100%;
+    border-radius: 5%;
+    padding-bottom: .5rem;
+    background-color: #F6CECE;
+}
+
+video {
+    display: flex;
+    /* height: 800px; */
+    width: 94%;
+    margin: 0 auto;
+}
+
+video::-internal-media-controls-download-button {
+    display: none;
+}
+
+video::-webkit-media-controls-enclosure {
+    overflow: hidden;
+}
+
+video::-webkit-media-controls-panel {
+    width: calc(100% + 30px);
+}
+
+/*
+文章详情页面
+ */
+.articleDetails-slider {
+    height: 100%;
+}
+
+.articleDetails-slider.am-slider .am-slides img {
+    width: 94%;
+    display: block;
+    border-radius: 5%;
+    /* padding: .5rem; */
+    margin: 0 auto;
+}
