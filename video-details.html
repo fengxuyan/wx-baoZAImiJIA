@@ -6,38 +6,21 @@
     <title>Title</title>
     <link rel="stylesheet" href="src/css/amazeui.min.css">
     <link rel="stylesheet" href="src/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
 <div data-am-widget="slider" class="details-slider am-slider am-slider-default"
-     data-am-slider='{ video: true, slideshow: false,directionNav:false,controlNav:false,slideshowSpeed:10,animationSpeed:150}'>
-    <div class="video-title">手摇铃</div>
+     data-am-slider='{ video: true, slideshow: false,directionNav:false,controlNav:false,slideshowSpeed:10,animationSpeed:150,}'>
     <div class="video-title tip-bottom">滑动可翻页</div>
-    <ul class="am-slides">
-        <li>
-            <!--poster="http://s.amazeui.org/media/i/demos/bing-2.jpg"-->
-            <video poster="http://s.amazeui.org/media/i/demos/bing-2.jpg" width="100" preload="auto" height="322"
-                   controls>
-                <source src="https://images.yningw.com/videoUrl/TCCAi5ED2h1525259173030.mp4" type="video/mp4"
-                        webkitAllowFullScreen mozallowfullscreen allowFullScreen>
-            </video>
-        </li>
-        <li>
-            <video poster="http://s.amazeui.org/media/i/demos/bing-2.jpg" width="500" preload="auto" height="322"
-                   controls>
-                <source src="https://images.yningw.com/videoUrl/TCCAi5ED2h1525259173030.mp4" type="video/mp4"
-                        webkitAllowFullScreen mozallowfullscreen allowFullScreen>
-            </video>
-        </li>
-        <li>
-            <video poster="http://s.amazeui.org/media/i/demos/bing-2.jpg" width="500" preload="auto" height="322"
-                   controls>
-                <source src="https://images.yningw.com/videoUrl/TCCAi5ED2h1525259173030.mp4" type="video/mp4"
-                        webkitAllowFullScreen mozallowfullscreen allowFullScreen>
-            </video>
-        </li>
-    </ul>
+    <ul class="am-slides"></ul>
 </div>
+<div class="articleDetails-slider">
+    <div class="artile-title"></div>
+    <div class="video-title tip-bottom">点击封面进行预览</div>
+    <div class="details-img"><img src=""></div>
+</div>
+
 <script src="src/js/jquery-3.3.1.min.js"></script>
 <script src="src/js/amazeui.min.js"></script>
 <script src="src/js/fastclick.js"></script>
@@ -51,6 +34,66 @@
     var body_height = document.documentElement.clientHeight;
     $('body').css('height', body_height)
 
+    var url = location.href;
+    var exclusive_id = serilizeURL(url).id;
+    var imgList;
+    function getDetailsData() {
+        $.ajax({
+
+//            http://121.196.233.1:8000/web/api/courses?member_exclusive_id=57d7686d61d765271cb23e3a
+            url: "http://121.196.233.1:8000/web/api" + "/courses?member_exclusive_id=" + exclusive_id,
+            async: false,
+            success: function (data) {
+                var exclusiveData = data.result;
+                var exclusiveDataLength = exclusiveData.length;
+
+                console.log(exclusiveData);
+                for (var i = 0; i < exclusiveDataLength; i++) {
+                    if(exclusiveData[i].source_type == 'video'){
+                        $('.articleDetails-slider').remove();
+                        $('.details-slider .am-slides').append(`
+
+                        <li><p class="title-txt">${exclusiveData[i].title}</p>
+
+                            <video poster="${exclusiveData[i].full_cover_url}" width="100" preload="auto" height="322"
+                                   controls>
+                                <source src="${exclusiveData[i].full_source_url}" type="video/mp4"
+                                        webkitAllowFullScreen mozallowfullscreen allowFullScreen>
+                            </video>
+                        </li>`)
+                    }else{
+                        $('.details-slider').remove();
+                        $($('.artile-title')[0]).html(exclusiveData[0].title);
+                        $('.details-img img').attr('src',exclusiveData[0].full_cover_url);
+                        imgList = exclusiveData[0].image_list_url;
+                    }
+                }
+            }
+        })
+    }
+    getDetailsData();
+
+    $('.details-img img').on('click',function () {
+
+        localStorage.setItem("imgList", JSON.stringify(imgList));
+        location.href='checkArticle.html';
+
+
+    })
+    function serilizeURL(url) {
+        var rs = url.split("?")[1];
+        var arr = rs.split("&");
+        var json = {};
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i].indexOf("=") != -1) {
+                json[arr[i].split("=")[0]] = arr[i].split("=")[1];
+            }
+            else {
+                json[arr[i]] = "undefined";
+            }
+        }
+        return json;
+    }
 </script>
 
 </body>

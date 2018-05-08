@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html id="demo-1" lang="zh">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+<body class="am-scroll-mandatory">
+<div data-am-widget="slider" class="am-slider am-slider-default" data-am-slider='{controlNav:false,}'>
+    <ul class="am-slides"></ul>
+</div>
+<!--<div class="video-title tip-bottom checkArticle">横屏查看效果更佳</div>-->
+</body>
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/rem.js"></script>
+
+<script>
+    var imgList = JSON.parse(localStorage.getItem("imgList"));
+
+    var body_height = document.documentElement.clientHeight;
+    $('body').css('height', body_height)
+    var imgListLength = imgList.length;
+    for (var i = 0; i < imgListLength; i++) {
+        $('.am-slides').append(`<li><img src="${imgList[i]}"></li>`)
+    }
+</script>
+
+</html>

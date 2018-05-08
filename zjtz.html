@@ -6,91 +6,27 @@
     <title>Title</title>
     <link rel="stylesheet" href="src/css/amazeui.min.css">
     <link rel="stylesheet" href="src/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
 
-<div data-am-widget="tabs" class="sort-container am-tabs am-tabs-d2">
+<div data-am-widget="tabs" class="sort-container am-tabs am-tabs-d2"  id="doc-my-tabs">
     <ul class="am-tabs-nav am-cf">
-        <li class="am-active"><a href="[data-tab-panel-0]"><i></i><span>青春</span></a></li>
-        <li class=""><a href="[data-tab-panel-1]"><i></i><span>彩虹</span></a></li>
-        <li class=""><a href="[data-tab-panel-2]"><i></i><span>歌唱</span></a></li>
+        <li class="am-active" data-param="teaching_aid" data-num="0"><a href="[data-tab-panel-0]"><i></i><span>教具操作视频</span></a></li>
+        <li class="" data-param="picture_book"  data-num="1"><a href="[data-tab-panel-1]"><i></i><span>绘本</span></a></li>
+        <li class="" data-param="outdoor_instruction_manual"  data-num="2"><a href="[data-tab-panel-2]"><i></i><span>户外指导手册</span></a>
+        </li>
     </ul>
-    <div class="am-tabs-bd">
-        <div data-tab-panel-0 class="am-tab-panel am-g doc-am-g  am-active box-container">
-            <div class="sort-title"><span> 我的梦想从豆芽开始</span></div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-
+    <div class="am-tabs-bd" style="height: 100%">
+        <div data-tab-panel-0 class="am-tab-panel am-g doc-am-g  am-active box-container container0">
+            <div class="sort-title"><span> 我的梦想从豆芽1111开始</span></div>
         </div>
-        <div data-tab-panel-1 class="am-tab-panel box-container ">
-            <div class="sort-title"><span> 我的梦想从豆芽开始</span></div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
+        <div data-tab-panel-1 class="am-tab-panel box-container container1">
+            <div class="sort-title"><span> 我的梦想从豆芽22开始</span></div>
         </div>
-        <div data-tab-panel-2 class="am-tab-panel box-container">
-            <div class="sort-title"><span> 我的梦想从豆芽开始</span></div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
-            <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
-                <div class="g-box">
-                    <img src="src/images/box.jpg">
-                </div>
-            </div>
+        <div data-tab-panel-2 class="am-tab-panel box-container container2">
+            <div class="sort-title"><span> 我的梦想从豆芽333开始</span></div>
         </div>
     </div>
 </div>
@@ -99,17 +35,65 @@
 <script src="src/js/jquery-3.3.1.min.js"></script>
 <script src="src/js/amazeui.min.js"></script>
 <script src="src/js/rem.js"></script>
-<script src="src/js/swiper.js"></script>
+<script src="src/js/fastclick.js"></script>
 
 <script>
     //解决300毫秒延迟问题
     $(function () {
-        $.AMUI.FastClick.attach(document.body);
+        // 解决ios端click事件300毫秒延迟
+        FastClick.attach(document.body);
+        getClassifyData('teaching_aid','0')
     });
-    $('.g-box').on('click', function (event) {
-//        location.href='video-details.html'
-        location.href='article-details.html'
+    function bindListener() {
+        $('.g-box').on('click',function (e) {
+            var exclusive_id=$(this).data("exclusive_id");
+            location.href='video-details.html?id='+exclusive_id;
+        })
+    }
+    function getClassifyData(param,num) {
+        $.ajax({
+            url: "http://121.196.233.1:8000/web/api" + "/member-exclusives?course_type=" + param,
+            success: function (data) {
+                var teachingData = data.result;
+                var teachingDataLength = teachingData.length;
+                for (var i = 0; i < teachingDataLength; i++) {
+                    $('.container'+num).append(`
+                     <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
+                        <div class="g-box" data-exclusive_id="${teachingData[i].id}">
+                             <img src="${teachingData[i].full_cover_url}">
+                        <div class="g-box-title">
+                        <p>${teachingData[i].member_month}</p>
+                        <p>${teachingData[i].title}</p></div>
+                        </div>
+                    </div>`);
+                    bindListener();
+                }
+            }
+        })
+    }
+
+
+    $('#doc-my-tabs').find('a').on('opened.tabs.amui', function(e) {
+        var num =  $(this).parent('li').data('num');
+        var param = $(this).parent('li').data('param');
+        if($('.container'+num).children('.box').length == 0){
+            getClassifyData(param,num);
+        }
     })
+
+    $('.am-tabs-nav.am-cf li').on('click', function (event, param) {
+        var num = $(this).data('num');
+        var param = $(this).data('param');
+        if($('.container'+num).children('.box').length == 0){
+            getClassifyData(param,num);
+        }
+    });
+
+    var body_height = document.documentElement.clientHeight;
+    $('body').css('height', body_height);
+    $('.sort-container').css('height', body_height);
+
+
 </script>
 
 

@@ -8,17 +8,14 @@
     <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
+
 <body>
-<div data-am-widget="slider" class="articleDetails-slider am-slider am-slider-default"
-     data-am-slider='{ video: true, slideshow: false,directionNav:false,controlNav:false,slideshowSpeed:10,animationSpeed:150}'>
+<div class="articleDetails-slider">
     <div class="video-title">手摇铃</div>
     <div class="video-title tip-bottom">点击封面进行预览</div>
-    <ul class="am-slides">
-        <li><img src="src/images/box.jpg"></li>
-        <li><img src="src/images/box.jpg"></li>
-        <li><img src="src/images/box.jpg"></li>
-    </ul>
+    <div class="details-img"><img src="src/images/box.jpg" onclick="checkArticle()"></div>
 </div>
+
 <script src="src/js/jquery-3.3.1.min.js"></script>
 <script src="src/js/amazeui.min.js"></script>
 <script src="src/js/fastclick.js"></script>
@@ -32,6 +29,12 @@
     var body_height = document.documentElement.clientHeight;
     $('body').css('height', body_height)
 
+    $('.details-img').on('click',function () {
+        console.log('hih');
+    })
+    function checkArticle() {
+        location.href='checkArticle.html'
+    }
 </script>
 
 </body>
