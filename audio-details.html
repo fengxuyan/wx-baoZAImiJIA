@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+
+
+<div class="circular audioDetails-img">
+
+</div>
+<div class="audio-container" >
+    <audio src="" preload="auto" controls></audio>
+</div>
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/rem.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/tools.js"></script>
+
+<script>
+    //解决300毫秒延迟问题
+    $(function () {
+        // 解决ios端click事件300毫秒延迟
+        FastClick.attach(document.body);
+    });
+    $('.audioDetails-img').on('click', function () {
+        console.log('##');
+    })
+    var url = location.href;
+    var exclusive_id = serilizeURL(url).id;
+
+    function getDetailsData() {
+        $.ajax({
+            url: "http://121.196.233.1:8000/web/api" + "/member-courses/" + exclusive_id,
+            success: function (data) {
+                var exclusiveData = data.result;
+
+                $('.circular.audioDetails-img').append(`  <img src="${exclusiveData.full_cover_url}" style="width: 100%;"
+         alt="${exclusiveData.title}"/>`);
+                $('.audio-container audio').attr('src', exclusiveData.full_source_url);
+            }
+        })
+    }
+    getDetailsData();
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -9,25 +9,53 @@
 </head>
 <body>
 
-<ul class="am-avg-sm-2 boxes">
-    <li class="box box-1">早教套组</li>
-    <li class="box box-2"></li>
-    <li class="box box-3"></li>
-    <li class="box box-4"></li>
-</ul>
+<ul class="am-avg-sm-2 boxes"></ul>
 
 <script src="src/js/jquery-3.3.1.min.js"></script>
 <script src="src/js/amazeui.min.js"></script>
+<script src="src/js/fastclick.js"></script>
 <script src="src/js/rem.js"></script>
 
 <script>
-    $('.boxes .box').on('click',function () {
-        location.href='zjtz.html'
-    })
     //解决300毫秒延迟问题
-    $(function() {
-        $.AMUI.FastClick.attach(document.body);
+    $(function () {
+        // 解决ios端click事件300毫秒延迟
+        FastClick.attach(document.body);
     });
+    function bindListener() {
+        $('.box').on('click',function (e) {
+            var memberCourseId=$(this).data("membercourseid");
+            var typeId=$(this).data("typeid");
+
+            if("1" == typeId){
+                location.href="box-index1.html?member_course_type_id="+memberCourseId;
+            }else if("2" == typeId){
+                location.href="box-index2.html?member_course_type_id="+memberCourseId;
+            }
+        })
+    }
+    function getCourseNames() {
+        $.ajax({
+            url: "http://121.196.233.1:8000/web/api" + "/member-course-types",
+            success: function (data) {
+                var courseNamesData = data.result;
+                var courseNamesDataLength = courseNamesData.length;
+
+                for(var i=0;i<courseNamesDataLength;i++){
+                    $('.boxes').append(`<li class="box" data-typeId=${courseNamesData[i].course_type}  data-memberCourseId=${courseNamesData[i].id} style="background-image: url('${courseNamesData[i].full_cover_url}');    background-size: 100% 100%;">${courseNamesData[i].title}</li>`);
+                }
+                console.log(courseNamesData);
+                bindListener();
+            }
+        })
+    }
+
+
+getCourseNames();
+
+
+
+
 </script>
 </body>
 

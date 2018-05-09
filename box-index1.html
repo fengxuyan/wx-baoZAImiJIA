@@ -20,13 +20,13 @@
     </ul>
     <div class="am-tabs-bd" style="height: 100%">
         <div data-tab-panel-0 class="am-tab-panel am-g doc-am-g  am-active box-container container0">
-            <div class="sort-title"><span> 我的梦想从豆芽1111开始</span></div>
+            <div class="sort-title"><span> 我的梦想从豆芽开始</span></div>
         </div>
         <div data-tab-panel-1 class="am-tab-panel box-container container1">
-            <div class="sort-title"><span> 我的梦想从豆芽22开始</span></div>
+            <div class="sort-title"><span> 宝宝的成长离不开绘本的引导！</span></div>
         </div>
         <div data-tab-panel-2 class="am-tab-panel box-container container2">
-            <div class="sort-title"><span> 我的梦想从豆芽333开始</span></div>
+            <div class="sort-title"><span> 户外指导手册</span></div>
         </div>
     </div>
 </div>
@@ -36,6 +36,7 @@
 <script src="src/js/amazeui.min.js"></script>
 <script src="src/js/rem.js"></script>
 <script src="src/js/fastclick.js"></script>
+<script src="src/js/tools.js"></script>
 
 <script>
     //解决300毫秒延迟问题
@@ -55,6 +56,7 @@
             url: "http://121.196.233.1:8000/web/api" + "/member-exclusives?course_type=" + param,
             success: function (data) {
                 var teachingData = data.result;
+                console.log(teachingData);
                 var teachingDataLength = teachingData.length;
                 for (var i = 0; i < teachingDataLength; i++) {
                     $('.container'+num).append(`
@@ -88,12 +90,6 @@
             getClassifyData(param,num);
         }
     });
-
-    var body_height = document.documentElement.clientHeight;
-    $('body').css('height', body_height);
-    $('.sort-container').css('height', body_height);
-
-
 </script>
 
 

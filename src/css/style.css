@@ -2,34 +2,22 @@
 首页
  */
 .boxes {
-    padding: 1rem;
+    padding: 0 .5rem;
+    padding-top: calc(45% - 1.5rem);
     width: 100%;
 }
 
 .boxes .box {
-    height: 3rem;
+    height: 4rem;
     color: #eee;
-    line-height: 3rem;
+    line-height: 4rem;
     text-align: center;
     font-weight: bold;
     transition: all .2s ease;
-    font-size: 0.5rem;
+    font-size: 0.55rem;
 }
-
-.box-1 {
-    background-color: #35BED1;
-}
-
-.box-2 {
-    background-color: #90C93E;
-}
-
-.box-3 {
-    background-color: #F85953;
-}
-
-.box-4 {
-    background-color: #F9A801;
+.boxes .box:nth-child(odd){
+    margin: 1rem 0;
 }
 
 /*
@@ -209,4 +197,96 @@ video::-webkit-media-controls-panel {
     margin-top: 0.5rem;
     text-align: center;
     font-size: .4rem;
+}
+
+/*
+音频播放
+ */
+.circular{
+    display:inline-block;
+    position:relative;
+    width:200px;
+    height:200px;
+    overflow:hidden;
+    border-radius:50%;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20%;
+}
+
+.circular img{
+    width:auto;
+    height:100%;
+}
+.audio-container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+/*
+绘本详情
+ */
+.indicator{
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    margin-top: -40px;
+}
+.indicator li{
+    margin-top: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background: rgba(0,0,0,0.5);
+    text-indent: -9999px;
+    list-style: none;
+}
+.indicator li.cur{
+    background: rgba(255,255,255,0.5);
+}
+.landscape {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #ffd40a;
+    font-size: 22px;
+    background: #32373b;
+}
+.landscape img {
+    margin-top: 20px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    -webkit-animation: landscape 1.5s infinite;
+    animation: landscape 1.5s infinite;
+}
+@-webkit-keyframes landscape {
+    0% {
+        -webkit-transform: rotate(-90deg);
+    }
+    30% {
+        -webkit-transform: rotate(0deg);
+    }
+    70% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-90deg);
+    }
+}
+@keyframes landscape {
+    0% {
+        transform: rotate(-90deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    70% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-90deg);
+    }
 }

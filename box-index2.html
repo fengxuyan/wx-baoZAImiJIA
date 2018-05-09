@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+
+<div data-am-widget="tabs" class="sort-container am-tabs am-tabs-d2" id="doc-my-tabs">
+    <ul class="am-tabs-nav am-cf"></ul>
+    <div class="am-tabs-bd" style="height: 100%;padding-top: 5%;"></div>
+</div>
+
+
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/rem.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/tools.js"></script>
+
+<script>
+    //解决300毫秒延迟问题
+    $(function () {
+        // 解决ios端click事件300毫秒延迟
+        FastClick.attach(document.body);
+        getClassifyName(member_course_type_id);
+    });
+
+    var url = location.href;
+    var member_course_type_id = serilizeURL(url).member_course_type_id;
+
+    function bindListener() {
+        $('.g-box').on('click', function (e) {
+            var source_type = $(this).data("source_type");
+            var exclusive_id = $(this).data("exclusive_id");
+
+            if ("audio" == source_type) {
+                location.href = 'audio-details.html?id=' + exclusive_id;
+            } else {
+                location.href = 'details2.html?id=' + exclusive_id;
+            }
+        })
+    }
+
+    function bindListenerName() {
+        $('.am-tabs-nav.am-cf li').on('click', function (event, param) {
+            var num = $(this).data('num');
+            var param = $(this).data('param');
+            $('.am-tabs-nav.am-cf li').removeClass('am-active')
+            $(this).addClass('am-active')
+            getClassifyData(param, num);
+        });
+        $('#doc-my-tabs').find('a').on('open.tabs.amui', function (e) {
+            var param = $(this).parent('li').data('param');
+            getClassifyData(param);
+        })
+
+    }
+
+    function getClassifyName(param, num) {
+        $.ajax({
+            url: "http://121.196.233.1:8000/web/api" + "/member-course-items?member_course_type_id=" + param,
+            success: function (data) {
+                var teachingData = data.result;
+                var teachingDataLength = teachingData.length;
+                for (var i = 0; i < teachingDataLength; i++) {
+                    if ('0' == i) {
+                        getClassifyData(teachingData[i].id)
+                        $('.am-tabs-nav.am-cf').append(`<li class="am-active" data-param="${teachingData[i].id}" ><a href="${teachingData[i].id}"><i></i><span>${teachingData[i].title}</span></a></li>`);
+
+                    } else {
+                        $('.am-tabs-nav.am-cf').append(`<li  data-param="${teachingData[i].id}"><a href="${teachingData[i].id}" ><i></i><span>${teachingData[i].title}</span></a></li>`);
+
+                    }
+                }
+                $('#doc-my-tabs').find('a').tabs('refresh')
+                bindListenerName();
+            }
+        })
+    }
+
+
+    function getClassifyData(param, num) {
+        $.ajax({
+            url: "http://121.196.233.1:8000/web/api" + "/member-courses?member_course_item_id=" + param,
+            success: function (data) {
+                var teachingData = data.result;
+                var teachingDataLength = teachingData.length;
+
+                $('.box-container').empty();
+                for (var i = 0; i < teachingDataLength; i++) {
+                    if ('0' == i) {
+                        $('.am-tabs-bd').append(`<div class="am-tab-panel am-g doc-am-g  am-active box-container" ></div>`);
+                    } else {
+                        $('.am-tabs-bd').append(`<div class="am-tab-panel  box-container"></div>`);
+                    }
+                    $('.am-tab-panel').append(`
+                     <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
+                        <div class="g-box" data-exclusive_id="${teachingData[i].id}" data-source_type="${teachingData[i].source_type}">
+                             <img src="${teachingData[i].full_cover_url}">
+                        <div class="g-box-title">
+                        <p></p>
+                        <p>${teachingData[i].title}</p></div>
+                        </div>
+                    </div>`);
+                }
+                bindListener();
+            }
+        })
+    }
+
+
+</script>
+
+
+</body>
+</html>

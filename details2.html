@@ -10,9 +10,7 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-<div data-am-widget="slider" class="details-slider am-slider am-slider-default"
-     data-am-slider='{ video: true, slideshow: false,directionNav:false,controlNav:false,slideshowSpeed:10,animationSpeed:150,}'>
-    <div class="video-title tip-bottom">滑动可翻页</div>
+<div class="details-slider ">
     <ul class="am-slides"></ul>
 </div>
 <div class="articleDetails-slider">
@@ -37,49 +35,45 @@
     var url = location.href;
     var exclusive_id = serilizeURL(url).id;
     var imgList;
+
     function getDetailsData() {
         $.ajax({
-
-//            http://121.196.233.1:8000/web/api/courses?member_exclusive_id=5af25c143d84da5a5dacaaff
-            url: "http://121.196.233.1:8000/web/api" + "/courses?member_exclusive_id=" + exclusive_id,
+            url: "http://121.196.233.1:8000/web/api" + "/member-courses/" + exclusive_id,
             async: false,
             success: function (data) {
                 var exclusiveData = data.result;
                 var exclusiveDataLength = exclusiveData.length;
 
-                console.log(exclusiveData);
-                for (var i = 0; i < exclusiveDataLength; i++) {
-                    if(exclusiveData[i].source_type == 'video'){
+                    if(exclusiveData.source_type == 'video'){
                         $('.articleDetails-slider').remove();
                         $('.details-slider .am-slides').append(`
 
-                        <li><p class="title-txt">${exclusiveData[i].title}</p>
-
-                            <video poster="${exclusiveData[i].full_cover_url}" width="100" preload="auto" height="322"
+                        <li><p class="title-txt">${exclusiveData.title}</p>
+                            <video poster="${exclusiveData.full_cover_url}" width="100" preload="auto" height="322"
                                    controls>
-                                <source src="${exclusiveData[i].full_source_url}" type="video/mp4"
+                                <source src="${exclusiveData.full_source_url}" type="video/mp4"
                                         webkitAllowFullScreen mozallowfullscreen allowFullScreen>
                             </video>
                         </li>`)
-                    }else{
-                        $('.details-slider').remove();
-                        $($('.artile-title')[0]).html(exclusiveData[0].title);
-                        $('.details-img img').attr('src',exclusiveData[0].full_cover_url);
-                        imgList = exclusiveData[0].image_list_url;
                     }
+ else{
+                        $('.details-slider').remove();
+                        $($('.artile-title')[0]).html(exclusiveData.title);
+                        $('.details-img img').attr('src',exclusiveData.full_cover_url);
+                        imgList = exclusiveData.image_list_url;
                 }
             }
         })
     }
+
     getDetailsData();
 
-    $('.details-img img').on('click',function () {
-
+    $('.details-img img').on('click', function () {
         localStorage.setItem("imgList", JSON.stringify(imgList));
-        location.href='picture-details.html';
-
+        location.href = 'picture-details.html';
 
     })
+
     function serilizeURL(url) {
         var rs = url.split("?")[1];
         var arr = rs.split("&");
