@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
     <title>绘本</title>
-    <link rel="stylesheet" href="../src/css/global.css">
-    <link rel="stylesheet" href="../src/css/zepto.fullpage.css">
-    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="src/css/global.css">
+    <link rel="stylesheet" href="src/css/zepto.fullpage.css">
+    <link rel="stylesheet" href="src/css/style.css">
 
 </head>
 <body>
@@ -20,10 +20,10 @@
         <!--<img src="src/images/landscape.png" height="194" width="128">-->
         <!--<p>为了更好的体验，请将手机/平板横屏</p>-->
     <!--</div>-->
-    <script src="../src/js/zepto.js"></script>
-    <script src="../src/js/zepto.fullpage.js"></script>
-    <script src="../src/js/fastclick.js"></script>
-    <script src="../src/js/rem.js"></script>
+    <script src="src/js/zepto.js"></script>
+    <script src="src/js/zepto.fullpage.js"></script>
+    <script src="src/js/fastclick.js"></script>
+    <script src="src/js/rem.js"></script>
 
     <script>
         //解决300毫秒延迟问题
@@ -44,7 +44,6 @@
     <script>
         $('.wp-inner').fullpage({
             change: function (e) {
-                $('.wp-inner').append(`<div class="page page1">1</div>`);
                 console.log('change', e.next, e.cur);
                 $('.indicator li').removeClass('cur').eq(e.cur).addClass('cur');
             },
