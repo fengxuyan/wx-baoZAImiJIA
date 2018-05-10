@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>宝在米家</title>
     <link rel="stylesheet" href="src/css/amazeui.min.css">
     <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport"
@@ -19,7 +19,7 @@
         <li class="" data-param="outdoor_instruction_manual" data-num="2"><a href="[data-tab-panel-2]"><i></i><span>户外指导手册</span></a>
         </li>
     </ul>
-    <div class="am-tabs-bd" style="height: 100%">
+    <div class="am-tabs-bd">
         <div data-tab-panel-0 class="am-tab-panel am-g doc-am-g  am-active box-container container0">
             <div class="sort-title"><span> 我的梦想从豆芽开始</span></div>
         </div>
@@ -37,6 +37,7 @@
 <script src="src/js/amazeui.min.js"></script>
 <script src="src/js/rem.js"></script>
 <script src="src/js/fastclick.js"></script>
+<script src="src/js/echo.min.js"></script>
 <script src="src/js/tools.js"></script>
 
 <script>
@@ -52,6 +53,12 @@
             var exclusive_id = $(this).data("exclusive_id");
             location.href = 'details.html?id=' + exclusive_id;
         })
+        echo.init({
+            offset: 100,
+            throttle: 250,
+            unload: false,
+            callback: function (element, op) {}
+        });
     }
 
     function getClassifyData(param, num) {
@@ -59,13 +66,13 @@
             url: requestUrl + "/member-exclusives?course_type=" + param,
             success: function (data) {
                 var teachingData = data.result;
-                console.log(teachingData);
+
                 var teachingDataLength = teachingData.length;
                 for (var i = 0; i < teachingDataLength; i++) {
                     $('.container' + num).append(`
                      <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
                         <div class="g-box" data-exclusive_id="${teachingData[i].id}">
-                             <img src="${teachingData[i].full_cover_url}">
+                             <img src="src/images/default.svg" data-echo="${teachingData[i].full_cover_url}">
                         <div class="g-box-title">
                         <p>${teachingData[i].member_month}</p>
                         <p>${teachingData[i].title}</p></div>

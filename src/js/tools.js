@@ -1,7 +1,7 @@
-var requestUrl = "http://121.196.233.1:8000/web/api";
-var body_height = document.documentElement.clientHeight;
-$('body').css('height', body_height);
-$('.sort-container').css('height', body_height);
+// var requestUrl = "http://121.196.233.1:8000/web/api";
+
+var requestUrl = "https://api.baozaimijia.com/web/api";
+
 function serilizeURL(url) {
     var rs = url.split("?")[1];
     var arr = rs.split("&");

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>宝在米家</title>
     <link rel="stylesheet" href="src/css/amazeui.min.css">
     <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport"
@@ -13,7 +13,7 @@
 
 <div data-am-widget="tabs" class="sort-container am-tabs am-tabs-d2" id="doc-my-tabs">
     <ul class="am-tabs-nav am-cf"></ul>
-    <div class="am-tabs-bd" style="height: 100%;padding-top: 5%;"></div>
+    <div class="am-tabs-bd"></div>
 </div>
 
 
@@ -22,6 +22,7 @@
 <script src="src/js/rem.js"></script>
 <script src="src/js/fastclick.js"></script>
 <script src="src/js/tools.js"></script>
+<script src="src/js/echo.min.js"></script>
 
 <script>
     //解决300毫秒延迟问题
@@ -45,6 +46,13 @@
                 location.href = 'details2.html?id=' + exclusive_id;
             }
         })
+        echo.init({
+            offset: 100,
+            throttle: 250,
+            unload: false,
+            callback: function (element, op) {
+            }
+        });
     }
 
     function bindListenerName() {
@@ -64,7 +72,7 @@
 
     function getClassifyName(param, num) {
         $.ajax({
-            url: "http://121.196.233.1:8000/web/api" + "/member-course-items?member_course_type_id=" + param,
+            url: requestUrl + "/member-course-items?member_course_type_id=" + param,
             success: function (data) {
                 var teachingData = data.result;
                 var teachingDataLength = teachingData.length;
@@ -87,12 +95,16 @@
 
     function getClassifyData(param, num) {
         $.ajax({
-            url: "http://121.196.233.1:8000/web/api" + "/member-courses?member_course_item_id=" + param,
+            url: requestUrl + "/member-courses?member_course_item_id=" + param,
             success: function (data) {
                 var teachingData = data.result;
                 var teachingDataLength = teachingData.length;
-
                 $('.box-container').empty();
+
+                if (0 == teachingDataLength) {
+                } else {
+                    $('.am-tabs-bd').css('padding-top', '5%')
+                }
                 for (var i = 0; i < teachingDataLength; i++) {
                     if ('0' == i) {
                         $('.am-tabs-bd').append(`<div class="am-tab-panel am-g doc-am-g  am-active box-container" ></div>`);
@@ -102,7 +114,7 @@
                     $('.am-tab-panel').append(`
                      <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
                         <div class="g-box" data-exclusive_id="${teachingData[i].id}" data-source_type="${teachingData[i].source_type}">
-                             <img src="${teachingData[i].full_cover_url}">
+                          <img src="src/images/default.svg" data-echo="${teachingData[i].full_cover_url}">
                         <div class="g-box-title">
                         <p></p>
                         <p>${teachingData[i].title}</p></div>
@@ -113,7 +125,6 @@
             }
         })
     }
-
 
 </script>
 
