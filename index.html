@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
-    <title>宝在米家</title>
     <link rel="stylesheet" href="src/css/amazeui.min.css">
     <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport"
@@ -48,7 +47,7 @@
                 var courseNamesDataLength = courseNamesData.length;
 
                 for (var i = 0; i < courseNamesDataLength; i++) {
-                    $('.boxes').append(`<li class="box" data-typeId=${courseNamesData[i].course_type}  data-memberCourseId=${courseNamesData[i].id} style="background-image: url('${courseNamesData[i].full_cover_url}'); background-size: 100% 100%;">${courseNamesData[i].title}</li>`);
+                    $('.boxes').append(`<li class="box" data-typeId=${courseNamesData[i].course_type}  data-memberCourseId=${courseNamesData[i].id} style="background-image: url('${courseNamesData[i].full_cover_url}');">${courseNamesData[i].title}</li>`);
                 }
                 bindListener();
             }
