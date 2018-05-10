@@ -1,69 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
-    <title>绘本</title>
-    <link rel="stylesheet" href="../src/css/global.css">
-    <link rel="stylesheet" href="../src/css/zepto.fullpage.css">
-    <link rel="stylesheet" href="../src/css/style.css">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
-    <div class="wp">
-        <div class="wp-inner"></div>
-        <ul class="indicator"></ul>
+<div class="slider-container">
+    <div data-am-widget="slider" class="picture-details am-slider am-slider-default" data-am-slider='{slideshow:false}'>
+        <ul class="am-slides"></ul>
     </div>
-    <span class="start"><b></b></span>
-    <!--<div class="landscape">-->
-        <!--<img src="src/images/landscape.png" height="194" width="128">-->
-        <!--<p>为了更好的体验，请将手机/平板横屏</p>-->
-    <!--</div>-->
-    <script src="../src/js/zepto.js"></script>
-    <script src="../src/js/zepto.fullpage.js"></script>
-    <script src="../src/js/fastclick.js"></script>
-    <script src="../src/js/rem.js"></script>
+</div>
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/rem.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/tools.js"></script>
 
-    <script>
-        //解决300毫秒延迟问题
-        $(function () {
-            // 解决ios端click事件300毫秒延迟
-            FastClick.attach(document.body);
-        });
-        var imgList = JSON.parse(localStorage.getItem("imgList"));
-        var imgListLength = imgList.length;
-        function getContent() {
-            for (var i = 0; i < imgListLength; i++) {
-                $('.wp-inner').append(`<div class="page" style="background-image: url('${imgList[i]}');background-size:100% 100%;background-repeat: no-repeat;"></div>`);
-                $('.indicator').append(`<li>i</li>`);
-            }
+<script>
+    //解决300毫秒延迟问题
+    $(function () {
+        // 解决ios端click事件300毫秒延迟
+        FastClick.attach(document.body);
+    });
+    var imgList = JSON.parse(localStorage.getItem("imgList"));
+    var imgListLength = imgList.length;
+
+    function appendImages() {
+        for (var i = 0; i < imgListLength; i++) {
+            $('.picture-details .am-slides').append(`<li><img src="${imgList[i]}"></li>`);
         }
-        getContent();
-    </script>
-    <script>
-        $('.wp-inner').fullpage({
-            change: function (e) {
-                $('.wp-inner').append(`<div class="page page1">1</div>`);
-                console.log('change', e.next, e.cur);
-                $('.indicator li').removeClass('cur').eq(e.cur).addClass('cur');
-            },
-            beforeChange: function (e) {
-                console.log('beforeChange', e.next, e.cur);
-            },
-            afterChange: function (e) {
-                console.log('afterChange', e.next, e.cur);
-            },
-            orientationchange: function(e) {
-                if (e === 'landscape') {
-                    $('.landscape').hide();
-                } else {
-                    $('.wp-inner').show();
-                    $('.landscape').show();
-                }
-            }
-        });
+    }
 
-    </script>
+    appendImages();
+
+</script>
+
+
 </body>
 </html>

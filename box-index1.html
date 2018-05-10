@@ -4,18 +4,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../src/css/amazeui.min.css">
-    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
 
-<div data-am-widget="tabs" class="sort-container am-tabs am-tabs-d2"  id="doc-my-tabs">
+<div data-am-widget="tabs" class="sort-container am-tabs am-tabs-d2" id="doc-my-tabs">
     <ul class="am-tabs-nav am-cf">
-        <li class="am-active" data-param="teaching_aid" data-num="0"><a href="[data-tab-panel-0]"><i></i><span>教具操作视频</span></a></li>
-        <li class="" data-param="picture_book"  data-num="1"><a href="[data-tab-panel-1]"><i></i><span>绘本</span></a></li>
-        <li class="" data-param="outdoor_instruction_manual"  data-num="2"><a href="[data-tab-panel-2]"><i></i><span>户外指导手册</span></a>
+        <li class="am-active" data-param="teaching_aid" data-num="0"><a
+                href="[data-tab-panel-0]"><i></i><span>教具操作视频</span></a></li>
+        <li class="" data-param="picture_book" data-num="1"><a href="[data-tab-panel-1]"><i></i><span>绘本</span></a></li>
+        <li class="" data-param="outdoor_instruction_manual" data-num="2"><a href="[data-tab-panel-2]"><i></i><span>户外指导手册</span></a>
         </li>
     </ul>
     <div class="am-tabs-bd" style="height: 100%">
@@ -32,34 +33,36 @@
 </div>
 
 
-<script src="../src/js/jquery-3.3.1.min.js"></script>
-<script src="../src/js/amazeui.min.js"></script>
-<script src="../src/js/rem.js"></script>
-<script src="../src/js/fastclick.js"></script>
-<script src="../src/js/tools.js"></script>
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/rem.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/tools.js"></script>
 
 <script>
     //解决300毫秒延迟问题
     $(function () {
         // 解决ios端click事件300毫秒延迟
         FastClick.attach(document.body);
-        getClassifyData('teaching_aid','0')
+        getClassifyData('teaching_aid', '0')
     });
+
     function bindListener() {
-        $('.g-box').on('click',function (e) {
-            var exclusive_id=$(this).data("exclusive_id");
-            location.href='details.html?id='+exclusive_id;
+        $('.g-box').on('click', function (e) {
+            var exclusive_id = $(this).data("exclusive_id");
+            location.href = 'details.html?id=' + exclusive_id;
         })
     }
-    function getClassifyData(param,num) {
+
+    function getClassifyData(param, num) {
         $.ajax({
-            url: "http://121.196.233.1:8000/web/api" + "/member-exclusives?course_type=" + param,
+            url: requestUrl + "/member-exclusives?course_type=" + param,
             success: function (data) {
                 var teachingData = data.result;
                 console.log(teachingData);
                 var teachingDataLength = teachingData.length;
                 for (var i = 0; i < teachingDataLength; i++) {
-                    $('.container'+num).append(`
+                    $('.container' + num).append(`
                      <div class="box am-u-sm-6 am-u-md-6 am-u-lg-6">
                         <div class="g-box" data-exclusive_id="${teachingData[i].id}">
                              <img src="${teachingData[i].full_cover_url}">
@@ -75,19 +78,19 @@
     }
 
 
-    $('#doc-my-tabs').find('a').on('opened.tabs.amui', function(e) {
-        var num =  $(this).parent('li').data('num');
+    $('#doc-my-tabs').find('a').on('opened.tabs.amui', function (e) {
+        var num = $(this).parent('li').data('num');
         var param = $(this).parent('li').data('param');
-        if($('.container'+num).children('.box').length == 0){
-            getClassifyData(param,num);
+        if ($('.container' + num).children('.box').length == 0) {
+            getClassifyData(param, num);
         }
     })
 
     $('.am-tabs-nav.am-cf li').on('click', function (event, param) {
         var num = $(this).data('num');
         var param = $(this).data('param');
-        if($('.container'+num).children('.box').length == 0){
-            getClassifyData(param,num);
+        if ($('.container' + num).children('.box').length == 0) {
+            getClassifyData(param, num);
         }
     });
 </script>

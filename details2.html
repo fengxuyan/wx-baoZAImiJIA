@@ -4,8 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="../src/css/amazeui.min.css">
-    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="src/css/amazeui.min.css">
+    <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
@@ -19,18 +19,18 @@
     <div class="details-img"><img src=""></div>
 </div>
 
-<script src="../src/js/jquery-3.3.1.min.js"></script>
-<script src="../src/js/amazeui.min.js"></script>
-<script src="../src/js/fastclick.js"></script>
-<script src="../src/js/rem.js"></script>
+<script src="src/js/jquery-3.3.1.min.js"></script>
+<script src="src/js/amazeui.min.js"></script>
+<script src="src/js/fastclick.js"></script>
+<script src="src/js/rem.js"></script>
+<script src="src/js/tools.js"></script>
+
 <script>
     //解决300毫秒延迟问题
     $(function () {
         // 解决ios端click事件300毫秒延迟
         FastClick.attach(document.body);
     });
-    var body_height = document.documentElement.clientHeight;
-    $('body').css('height', body_height)
 
     var url = location.href;
     var exclusive_id = serilizeURL(url).id;
@@ -38,15 +38,15 @@
 
     function getDetailsData() {
         $.ajax({
-            url: "http://121.196.233.1:8000/web/api" + "/member-courses/" + exclusive_id,
+            url: requestUrl + "/member-courses/" + exclusive_id,
             async: false,
             success: function (data) {
                 var exclusiveData = data.result;
                 var exclusiveDataLength = exclusiveData.length;
 
-                    if(exclusiveData.source_type == 'video'){
-                        $('.articleDetails-slider').remove();
-                        $('.details-slider .am-slides').append(`
+                if (exclusiveData.source_type == 'video') {
+                    $('.articleDetails-slider').remove();
+                    $('.details-slider .am-slides').append(`
 
                         <li><p class="title-txt">${exclusiveData.title}</p>
                             <video poster="${exclusiveData.full_cover_url}" width="100" preload="auto" height="322"
@@ -55,39 +55,23 @@
                                         webkitAllowFullScreen mozallowfullscreen allowFullScreen>
                             </video>
                         </li>`)
-                    }
- else{
-                        $('.details-slider').remove();
-                        $($('.artile-title')[0]).html(exclusiveData.title);
-                        $('.details-img img').attr('src',exclusiveData.full_cover_url);
-                        imgList = exclusiveData.image_list_url;
+                }
+                else {
+                    $('.details-slider').remove();
+                    $($('.artile-title')[0]).html(exclusiveData.title);
+                    $('.details-img img').attr('src', exclusiveData.full_cover_url);
+                    imgList = exclusiveData.image_list_url;
                 }
             }
         })
     }
 
     getDetailsData();
-
     $('.details-img img').on('click', function () {
         localStorage.setItem("imgList", JSON.stringify(imgList));
         location.href = 'picture-details.html';
 
     })
-
-    function serilizeURL(url) {
-        var rs = url.split("?")[1];
-        var arr = rs.split("&");
-        var json = {};
-        for (var i = 0; i < arr.length; i++) {
-            if (arr[i].indexOf("=") != -1) {
-                json[arr[i].split("=")[0]] = arr[i].split("=")[1];
-            }
-            else {
-                json[arr[i]] = "undefined";
-            }
-        }
-        return json;
-    }
 </script>
 
 </body>

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="src/css/amazeui.min.css">
     <link rel="stylesheet" href="src/css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
 
@@ -15,6 +16,7 @@
 <script src="src/js/amazeui.min.js"></script>
 <script src="src/js/fastclick.js"></script>
 <script src="src/js/rem.js"></script>
+<script src="src/js/tools.js"></script>
 
 <script>
     //解决300毫秒延迟问题
@@ -22,38 +24,38 @@
         // 解决ios端click事件300毫秒延迟
         FastClick.attach(document.body);
     });
-    function bindListener() {
-        $('.box').on('click',function (e) {
-            var memberCourseId=$(this).data("membercourseid");
-            var typeId=$(this).data("typeid");
 
-            if("1" == typeId){
-                location.href="box-index1.html?member_course_type_id="+memberCourseId;
-            }else if("2" == typeId){
-                location.href="box-index2.html?member_course_type_id="+memberCourseId;
+
+    function bindListener() {
+        $('.box').on('click', function (e) {
+            var memberCourseId = $(this).data("membercourseid");
+            var typeId = $(this).data("typeid");
+
+            if ("1" == typeId) {
+                location.href = "box-index1.html?member_course_type_id=" + memberCourseId;
+            } else if ("2" == typeId) {
+                location.href = "box-index2.html?member_course_type_id=" + memberCourseId;
             }
         })
     }
+
     function getCourseNames() {
         $.ajax({
-            url: "http://121.196.233.1:8000/web/api" + "/member-course-types",
+            url: requestUrl + "/member-course-types",
             success: function (data) {
                 var courseNamesData = data.result;
                 var courseNamesDataLength = courseNamesData.length;
 
-                for(var i=0;i<courseNamesDataLength;i++){
-                    $('.boxes').append(`<li class="box" data-typeId=${courseNamesData[i].course_type}  data-memberCourseId=${courseNamesData[i].id} style="background-image: url('${courseNamesData[i].full_cover_url}');    background-size: 100% 100%;">${courseNamesData[i].title}</li>`);
+                for (var i = 0; i < courseNamesDataLength; i++) {
+                    $('.boxes').append(`<li class="box" data-typeId=${courseNamesData[i].course_type}  data-memberCourseId=${courseNamesData[i].id} style="background-image: url('${courseNamesData[i].full_cover_url}'); background-size: 100% 100%;">${courseNamesData[i].title}</li>`);
                 }
-                console.log(courseNamesData);
                 bindListener();
             }
         })
     }
 
 
-getCourseNames();
-
-
+    getCourseNames();
 
 
 </script>
